@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:computer	xmlns:tns="http://www.example.org/simpleXMLSchema" 
+				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:schemaLocation="http://www.example.org/simpleXMLSchema simpleXMLSchema.xsd ">
+  <tns:device id="idvalue0">
+    <tns:name>tns:name</tns:name>
+    <tns:origin>tns:origin</tns:origin>
+    <tns:price>1</tns:price>
+    <tns:internalType>
+      <tns:cooler>true</tns:cooler>
+      <tns:energy>0.0</tns:energy>
+      <tns:group>audio</tns:group>
+      <tns:port>PCI</tns:port>
+    </tns:internalType>
+  </tns:device>
+</tns:computer>

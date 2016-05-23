@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+		xmlns:tns="http://www.example.org/simpleXMLSchema" 
+		targetNamespace="http://www.example.org/simpleXMLSchema"
+		elementFormDefault="qualified">
+		
+		<element name="computer">
+			<complexType>
+				<sequence>
+					<element name="device" type="tns:Device" minOccurs="1" maxOccurs="unbounded" />
+				</sequence>
+			</complexType>
+		</element>
+		
+		<complexType name="Device">
+			<sequence>
+				<element name="name" type="string" />
+				<element name="origin" type="string" />
+				<element name="price" type="positiveInteger" />
+				<element ref="tns:abstractType" minOccurs="1" maxOccurs="10" />
+			</sequence>
+			<attribute name="id" type="tns:idType" use="required" />
+			<attribute name="critical" type="boolean" default="false" />
+		</complexType>
+		
+		<element name="abstractType" type="tns:AbstractType" abstract="true" ></element>
+		<element name="internalType" type="tns:Internal" substitutionGroup="tns:abstractType"></element>
+		<element name="externalType" type="tns:External" substitutionGroup="tns:abstractType"></element>
+		
+		<simpleType name="idType">
+			<restriction base="ID">
+				<pattern value="([A-Z]){1}([a-z0-9]){1,12}" />
+			</restriction>
+		</simpleType>
+		
+		<complexType name="AbstractType">
+			<sequence>
+				<element name="cooler" type="boolean" />
+				<element name="energy" type="double" />
+				<element name="group" type="tns:Group" />
+			</sequence>
+		</complexType>
+		
+		<simpleType name="Group">
+			<restriction base="string">
+				<enumeration value="audio" />
+				<enumeration value="video" />
+				<enumeration value="input" />
+				<enumeration value="print" />
+				<enumeration value="data" />
+			</restriction>
+		</simpleType>
+		
+		<element name="energy" type="positiveInteger" />
+				<element name="cooler" type="boolean" />
+				<element name="group" type="tns:Group"/>
+		
+		<complexType name="Internal">
+			<complexContent>
+				<extension base="tns:AbstractType">
+					<sequence>
+						<element name="port" type="tns:intPort" />
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+		
+		<complexType name="External">
+			<complexContent>
+				<extension base="tns:AbstractType">
+					<sequence>
+						<element name="port" type="tns:extPort" />
+					</sequence>
+					<attribute name="extPower" type="boolean" use="optional" default="false" />
+				</extension>
+			</complexContent>
+		</complexType>
+		
+				
+		<simpleType name="extPort">
+			<restriction base="string">
+				<enumeration value="LPT" />
+				<enumeration value="USB" />
+				<enumeration value="COM" />
+				<enumeration value="VGA" />
+				<enumeration value="SVGA" />
+				<enumeration value="JET" />
+			</restriction>
+		</simpleType>
+		
+		<simpleType name="intPort">
+			<restriction base="string">
+				<enumeration value="PCI" />
+				<enumeration value="IDE" />
+				<enumeration value="SATA" />
+				<enumeration value="DIMM" />
+				<enumeration value="SIMM" />
+				<enumeration value="PCIE" />
+				<enumeration value="Socket" />
+				<enumeration value="Base" />
+			</restriction>
+		</simpleType>
+		
+</schema>

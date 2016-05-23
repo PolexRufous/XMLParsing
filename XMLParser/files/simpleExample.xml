@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<computer	xmlns="http://www.example.org/simpleXMLSchema"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.example.org/simpleXMLSchema simpleXMLSchema.xsd">
+			
+	<device id="Hddrive1" critical="true">
+		<name>SeagateBaracuda250GB</name>
+		<origin>China</origin>
+		<price>150</price>
+		<internalType>
+			<cooler>false</cooler>
+			<energy>5</energy>
+			<group>data</group>
+			<port>SATA</port>
+		</internalType>
+		<externalType extPower="true">
+			<cooler>true</cooler>
+			<energy>7.3</energy>
+			<group>data</group>
+			<port>USB</port>
+		</externalType>
+	</device>
+	
+	<device id="Cdrive1">
+		<name>AsusDVD32x</name>
+		<origin>China</origin>
+		<price>67</price>
+		<externalType extPower="false">
+			<cooler>true</cooler>
+			<energy>6</energy>
+			<group>input</group>
+			<port>USB</port>
+		</externalType>
+	</device>
+	
+	<device id="Memory1">
+		<name>AsusMemory4GB</name>
+		<origin>China</origin>
+		<price>81</price>
+		<internalType>
+			<cooler>false</cooler>
+			<energy>3</energy>
+			<group>data</group>
+			<port>DIMM</port>
+		</internalType>
+	</device>
+	
+	<device id="Memory2">
+		<name>AsusMemory4GB</name>
+		<origin>China</origin>
+		<price>81</price>
+		<internalType>
+			<cooler>false</cooler>
+			<energy>3</energy>
+			<group>data</group>
+			<port>DIMM</port>
+		</internalType>
+	</device>
+	
+	<device id="Mainboard">
+		<name>AsusMainSuperCool</name>
+		<origin>China</origin>
+		<price>137</price>
+		<internalType>
+			<cooler>true</cooler>
+			<energy>9</energy>
+			<group>data</group>
+			<port>Base</port>
+		</internalType>
+	</device>
+	
+	<device id="Video1">
+		<name>Huangao Video 512MB</name>
+		<origin>China</origin>
+		<price>143</price>
+		<internalType>
+			<cooler>true</cooler>
+			<energy>11</energy>
+			<group>video</group>
+			<port>PCIE</port>
+		</internalType>
+	</device>
+	
+	
+	<device id="Sound1">
+		<name>Sven audio 18Vt</name>
+		<origin>China</origin>
+		<price>17</price>
+		<externalType extPower="true">
+			<cooler>false</cooler>
+			<energy>18</energy>
+			<group>audio</group>
+			<port>JET</port>
+		</externalType>
+	</device>
+	
+	
+	<device id="Screen1">
+		<name>LG 19"</name>
+		<origin>China</origin>
+		<price>156</price>
+		<externalType extPower="true">
+			<cooler>true</cooler>
+			<energy>23</energy>
+			<group>video</group>
+			<port>VGA</port>
+		</externalType>
+	</device>
+	
+	<device id="Processor1">
+		<name>Intel Core i18</name>
+		<origin>China</origin>
+		<price>214</price>
+		<internalType>
+			<cooler>true</cooler>
+			<energy>11</energy>
+			<group>data</group>
+			<port>Socket</port>
+		</internalType>
+	</device>
+	
+</computer>
