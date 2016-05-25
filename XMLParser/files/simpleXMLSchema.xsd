@@ -52,10 +52,6 @@
 			</restriction>
 		</simpleType>
 		
-		<element name="energy" type="positiveInteger" />
-				<element name="cooler" type="boolean" />
-				<element name="group" type="tns:Group"/>
-		
 		<complexType name="Internal">
 			<complexContent>
 				<extension base="tns:AbstractType">
