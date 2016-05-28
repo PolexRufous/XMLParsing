@@ -34,6 +34,7 @@ public class SAXComputerReader implements ComputerReader {
 			reader.parse(xmlFileName);
 			
 			computer = handler.getComputer();
+			
 			return getCompInstanse();
 			
 			} catch (SAXException | IOException e) {

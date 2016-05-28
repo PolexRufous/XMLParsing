@@ -70,4 +70,21 @@ public class Internal
         this.port = value;
     }
 
+    @Override
+    public String toString(){
+    	StringBuilder builder = new StringBuilder("");
+    	builder.append("\t \t<internalType>");
+    	builder.append("\n\t\t\t");
+    	builder.append("<cooler>" + isCooler() + "</cooler>");
+    	builder.append("\n\t\t\t");
+    	builder.append("<energy>" + getEnergy() + "</energy>");
+    	builder.append("\n\t\t\t");
+    	builder.append("<group>" + getGroup() + "</group>");
+    	builder.append("\n\t\t\t");
+    	builder.append("<port>" + getPort() + "</port>");
+    	builder.append("\n\t\t");
+    	builder.append("</internalType>");
+    	return builder.toString();
+    }
+    
 }

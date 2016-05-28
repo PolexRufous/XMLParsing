@@ -228,4 +228,35 @@ public class Device {
         this.critical = value;
     }
 
+    
+    @Override
+    public String toString(){
+    	
+    	StringBuilder builder = new StringBuilder("");
+    	
+    	builder.append("\t<device ");
+    	builder.append("id=\"");
+    	builder.append(id);
+    	builder.append("\"");
+    	if(isCritical()){
+    		builder.append(" critical=\"true\"");
+    	}
+    	builder.append(">");
+    	builder.append("\n \t \t");
+    	builder.append("<name>" + name + "</name>");
+    	builder.append("\n \t \t");
+    	builder.append("<origin>" + origin + "</origin>");
+    	builder.append("\n \t \t");
+    	builder.append("<price>" + price.toString(0) + "</price>");
+    	builder.append("\n");
+    	
+    	for (JAXBElement<? extends AbstractType> each : abstractType) {
+    		builder.append(each.getValue().toString());
+		}
+    	builder.append("\n\t");
+    	builder.append("</device>");
+    	
+    	return builder.toString();
+    }
+    
 }

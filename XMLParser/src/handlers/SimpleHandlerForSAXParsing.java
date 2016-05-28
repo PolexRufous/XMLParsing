@@ -3,10 +3,13 @@ package handlers;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.xml.bind.JAXBElement;
+
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import javax.xml.namespace.QName;
 
 import entities.AbstractType;
 import entities.Computer;
@@ -17,11 +20,12 @@ import entities.Group;
 import entities.IntPort;
 import entities.Internal;
 import helpers.ComputerTagEnum;
+import helpers.Messanger;
 
 public class SimpleHandlerForSAXParsing extends HandlerForParsing {
 
 	private static final Logger consoleLogger = ProjectLogger.getConsoleLogger();
-	private Computer computer;
+
 	private Device device;
 	private AbstractType type;
 	private ComputerTagEnum currentTag = null;
@@ -66,12 +70,11 @@ public class SimpleHandlerForSAXParsing extends HandlerForParsing {
 	@Override
 	public void startDocument() throws SAXException {
 		computer = new Computer();
-		super.startDocument();
 	}
 	
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		// TODO Auto-generated method stub
+
 		if (localName.equalsIgnoreCase("device")) {
 			device = new Device();
 			device.setId(attributes.getValue("id"));
@@ -91,7 +94,8 @@ public class SimpleHandlerForSAXParsing extends HandlerForParsing {
 		// TODO Auto-generated method stub
 
 		String text = new String(ch, start, length).trim();
-		
+		if(text.isEmpty()) return;
+				
 		if (currentTag.equals(ComputerTagEnum.NAME)) {
 			device.setName(text);
 		} else if (currentTag.equals(ComputerTagEnum.ORIGIN)) {
@@ -103,35 +107,34 @@ public class SimpleHandlerForSAXParsing extends HandlerForParsing {
 		} else if (currentTag.equals(ComputerTagEnum.ENERGY)) {
 			type.setEnergy(Double.valueOf(text));
 		} else if (currentTag.equals(ComputerTagEnum.GROUP)) {
-			type.setGroup(Group.valueOf(text.toUpperCase()));
+			type.setGroup(Group.fromValue(text));
 		} else if (currentTag.equals(ComputerTagEnum.PORT)) {
 			if (type.getClass() == Internal.class) {
-				((Internal) type).setPort(IntPort.valueOf(text));
+				((Internal) type).setPort(IntPort.valueOf(text.toUpperCase()));
 			} else if (type.getClass() == External.class) {
-				((External) type).setPort(ExtPort.valueOf(text));
+				((External) type).setPort(ExtPort.valueOf(text.toUpperCase()));
 			}
 		}		
 	}
 	
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		// TODO Auto-generated method stub
 		if (localName.equalsIgnoreCase("device")) {
 			computer.getDevice().add(device);
 		} else if (localName.equalsIgnoreCase("externalType")) {
-			//device.getAbstractType().add((External)type);
+			JAXBElement<External> element = new JAXBElement<External>(new QName(uri, localName), External.class, (External) type);
+			List<JAXBElement<? extends AbstractType>> typeList = device.getAbstractType();
+			typeList.add(element);
 		} else if (localName.equalsIgnoreCase("internalType")) {
-			//device.getAbstractType().add(type);
-		} else {
-			currentTag = ComputerTagEnum.valueOf(localName.toUpperCase());
-		}
-		
+			JAXBElement<Internal> element = new JAXBElement<Internal>(new QName(uri, localName), Internal.class, (Internal) type);
+			List<JAXBElement<? extends AbstractType>> typeList = device.getAbstractType();
+			typeList.add(element);
+		}		
 	}
 	
 	@Override
 	public void endDocument() throws SAXException {
-		// TODO Auto-generated method stub
-		super.endDocument();
+		Messanger.printOperationCompleteMessage();
 	}
 		
 }

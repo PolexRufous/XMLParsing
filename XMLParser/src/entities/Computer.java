@@ -83,7 +83,6 @@ public class Computer {
     	builder.append("<computer>");
     	builder.append("\n");
     	for (Device each : device) {
-    		builder.append("\t");
     		builder.append(each.toString());
     		builder.append("\n");    		
     	}
